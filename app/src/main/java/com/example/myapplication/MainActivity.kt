@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.widget.Button
 import android.widget.EditText
 
@@ -40,6 +41,13 @@ class MainActivity : AppCompatActivity() {
         btnDialPhone.setOnClickListener {
             val phoneUri = Uri.parse("tel:1234567890")
             val intent = Intent(Intent.ACTION_DIAL, phoneUri)
+            if (intent.resolveActivity(packageManager) != null) {
+                startActivity(intent)
+            }
+        }
+        val btnCapturePhoto: Button = findViewById(R.id.btnCapturePhoto)
+        btnCapturePhoto.setOnClickListener {
+            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             if (intent.resolveActivity(packageManager) != null) {
                 startActivity(intent)
             }
